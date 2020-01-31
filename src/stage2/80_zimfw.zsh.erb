@@ -8,6 +8,7 @@ Actions:
   %Bclean-compiled%b  Clean Zsh compiled files
   %Bclean-dumpfile%b  Clean completion dump file
   %Bcompile%b         Compile Zsh files
+  %Bdoctor%b          Check for common issues
   %Bhelp%b            Print this help
   %Binfo%b            Print Zim and system info
   %Binstall%b         Install new modules
@@ -61,6 +62,7 @@ Options:
     clean-compiled) _zimfw_clean_compiled ;;
     clean-dumpfile) _zimfw_clean_dumpfile ;;
     compile) _zimfw_build_login_init && _zimfw_compile ;;
+    doctor) _zimfw_doctor ;;
     help) print -PR ${zusage} ;;
     info) _zimfw_info ;;
     install|update)

@@ -1,0 +1,5 @@
+_zimfw_doctor() {
+  local zopt
+  etc="$(grep -El '\bcompinit\b' /etc/zshenv /etc/zshrc /etc/zprofile /etc/zlogin 2> /dev/null)"
+  [ -n "${etc}" ] && _zimfw_print -P "compinit is probably already loaded in your system configuration file ${etc}"
+}

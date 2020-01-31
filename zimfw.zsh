@@ -282,8 +282,14 @@ _zimfw_compile() {
   source ${ZIM_HOME}/login_init.zsh ${zopt}
 }
 
+_zimfw_doctor() {
+  local zopt
+  etc="$(grep -El '\bcompinit\b' /etc/zshenv /etc/zshrc /etc/zprofile /etc/zlogin 2> /dev/null)"
+  [ -n "${etc}" ] && _zimfw_print -P "compinit is probably already loaded in your system configuration file ${etc}"
+}
+
 _zimfw_info() {
-  print -R 'zimfw version: '${_zversion}' (previous commit is 6129062)'
+  print -R 'zimfw version: '${_zversion}' (previous commit is 6f357b5)'
   print -R 'ZIM_HOME:      '${ZIM_HOME}
   print -R 'Zsh version:   '${ZSH_VERSION}
   print -R 'System info:   '$(command uname -a)
@@ -336,6 +342,7 @@ Actions:
   %Bclean-compiled%b  Clean Zsh compiled files
   %Bclean-dumpfile%b  Clean completion dump file
   %Bcompile%b         Compile Zsh files
+  %Bdoctor%b          Check for common issues
   %Bhelp%b            Print this help
   %Binfo%b            Print Zim and system info
   %Binstall%b         Install new modules
@@ -469,6 +476,7 @@ fi
     clean-compiled) _zimfw_clean_compiled ;;
     clean-dumpfile) _zimfw_clean_dumpfile ;;
     compile) _zimfw_build_login_init && _zimfw_compile ;;
+    doctor) _zimfw_doctor ;;
     help) print -PR ${zusage} ;;
     info) _zimfw_info ;;
     install|update)
